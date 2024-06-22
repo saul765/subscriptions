@@ -50,7 +50,7 @@ public class MerchantController {
         }
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<MerchantDTO> createMerchant(@RequestBody MerchantRequest request) {
         try {
             log.info("[Controller]: Starting execution createMerchant");
@@ -66,7 +66,7 @@ public class MerchantController {
         }
     }
 
-    @PutMapping("{merchantId}")
+    @PutMapping("/{merchantId}")
     public ResponseEntity<MerchantDTO> updateMerchant(@PathVariable("merchantId") Integer merchantId, @RequestBody MerchantRequest request) {
         try {
             log.info("[Controller]: Starting execution updateMerchant");
@@ -82,7 +82,7 @@ public class MerchantController {
         }
     }
 
-    @DeleteMapping("{merchantId}")
+    @DeleteMapping("/{merchantId}")
     public ResponseEntity<Void> deleteMerchant(@PathVariable("merchantId") Integer merchantId) {
         try {
             log.info("[Controller]: Starting execution deleteMerchant");
@@ -97,6 +97,4 @@ public class MerchantController {
             }
         }
     }
-
-
 }

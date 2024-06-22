@@ -6,15 +6,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MerchantDTO {
+public class ProductDTO {
 
     private Integer id;
 
     private String name;
 
-    private String email;
+    private Double price;
 
-    private String phoneNumber;
+    private String description;
 
-    private String address;
+    private Integer merchantId;
+
 }
