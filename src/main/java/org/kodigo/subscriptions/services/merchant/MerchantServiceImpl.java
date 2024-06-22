@@ -1,16 +1,14 @@
-package org.kodigo.subscriptions.services.merchant.implementation;
+package org.kodigo.subscriptions.services.merchant;
 
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.kodigo.subscriptions.dto.MerchantDTO;
 import org.kodigo.subscriptions.enums.ResponseCodeEnum;
 import org.kodigo.subscriptions.exception.AppException;
 import org.kodigo.subscriptions.mapper.MerchantMapper;
 import org.kodigo.subscriptions.repositories.IMerchantRepository;
-import org.kodigo.subscriptions.services.merchant.IMerchantService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
