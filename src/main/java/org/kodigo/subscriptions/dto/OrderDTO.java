@@ -3,8 +3,6 @@ package org.kodigo.subscriptions.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 public class OrderDTO {
@@ -15,5 +13,5 @@ public class OrderDTO {
 
     private Long subscriptionId;
 
-    private Date orderDate;
+    private String orderDate;
 }
