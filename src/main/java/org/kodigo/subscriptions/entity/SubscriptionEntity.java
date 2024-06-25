@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -13,7 +14,9 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Table(name = "subscriptions")
-public class SubscriptionEntity {
+public class SubscriptionEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "subscription_id")

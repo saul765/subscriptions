@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface IOrderDetailService {
 
-    List<OrderDetailEntity> getAllOrderDetails();
+    List<OrderDetailDTO> getAllOrderDetails();
 
-    List<OrderDetailEntity> getOrderDetailById(Integer orderDetailId);
+    List<OrderDetailDTO> getOrderDetailById(Integer orderDetailId);
 
-    List<OrderDetailEntity> getOrderDetailByOrderId(Integer orderId);
+    List<OrderDetailDTO> getOrderDetailByOrderId(Integer orderId);
 
-    List<OrderDetailEntity> getOrderDetailByProductId(Integer productId);
+    List<OrderDetailDTO> getOrderDetailByProductId(Integer productId);
 
-    OrderDetailEntity createOrderDetail(OrderDetailDTO orderDetailDTO);
+    OrderDetailDTO createOrderDetail(OrderDetailDTO orderDetailDTO);
 
-    OrderDetailEntity updateOrderDetail(Integer orderDetailId, OrderDetailUpdateDTO orderDetailUpdateDTO);
+    OrderDetailDTO updateOrderDetail(Integer orderDetailId, OrderDetailUpdateDTO orderDetailUpdateDTO);
 
     void deleteOrderDetail(Integer orderDetailId);
 

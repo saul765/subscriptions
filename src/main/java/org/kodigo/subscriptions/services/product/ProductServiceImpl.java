@@ -29,7 +29,7 @@ public class ProductServiceImpl implements IProductService {
         log.info("[Service]: Starting execution getAllProducts");
         List<ProductDTO> response = productRepository.findAll()
                 .stream()
-                .map(productMapper::toProductDTO)
+                .map(productMapper::entityToDTO)
                 .toList();
 
         if (response.isEmpty()) {
@@ -45,7 +45,7 @@ public class ProductServiceImpl implements IProductService {
         log.info("[Service]: Starting execution getProductById");
         List<ProductDTO> response = productRepository.findById(productId.longValue())
                 .stream()
-                .map(productMapper::toProductDTO)
+                .map(productMapper::entityToDTO)
                 .toList();
 
         if (response.isEmpty()) {
@@ -61,7 +61,7 @@ public class ProductServiceImpl implements IProductService {
         log.info("[Service]: Starting execution getProductByName");
         List<ProductDTO> response = productRepository.findByNameContainingIgnoreCase(name)
                 .stream()
-                .map(productMapper::toProductDTO)
+                .map(productMapper::entityToDTO)
                 .toList();
 
         if (response.isEmpty()) {
@@ -77,7 +77,7 @@ public class ProductServiceImpl implements IProductService {
         log.info("[Service]: Starting execution getProductsByMerchantId");
         List<ProductDTO> response = productRepository.findByMerchantId(merchantId.longValue())
                 .stream()
-                .map(productMapper::toProductDTO)
+                .map(productMapper::entityToDTO)
                 .toList();
 
         if (response.isEmpty()) {
@@ -93,7 +93,7 @@ public class ProductServiceImpl implements IProductService {
         log.info("[Service]: Starting execution getProductsByMerchantName");
         List<ProductDTO> response = productRepository.findByMerchantNameContainingIgnoreCase(merchantName)
                 .stream()
-                .map(productMapper::toProductDTO)
+                .map(productMapper::entityToDTO)
                 .toList();
 
         if (response.isEmpty()) {
@@ -109,9 +109,9 @@ public class ProductServiceImpl implements IProductService {
         log.info("[Service]: Starting execution createProduct");
 
         ProductDTO response = Optional.ofNullable(productDTO)
-                .map(productMapper::toProduct)
+                .map(productMapper::dtoToEntity)
                 .map(productRepository::save)
-                .map(productMapper::toProductDTO)
+                .map(productMapper::entityToDTO)
                 .orElseThrow(
                         () -> AppException.internalServerError(ResponseCodeEnum.CODE_500, "Error creating product")
                 );
@@ -132,7 +132,7 @@ public class ProductServiceImpl implements IProductService {
                     return product;
                 })
                 .map(productRepository::save)
-                .map(productMapper::toProductDTO)
+                .map(productMapper::entityToDTO)
                 .orElseThrow(() -> AppException.notFound(ResponseCodeEnum.CODE_404, "Product not found"));
 
         log.info("[Service]: Finishing execution updateProduct");

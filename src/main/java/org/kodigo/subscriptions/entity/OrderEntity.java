@@ -6,12 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "orders")
-public class OrderEntity {
+public class OrderEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +32,6 @@ public class OrderEntity {
     private SubscriptionEntity subscription;
 
     @Column(name = "order_date")
-    private Double orderDate;
+    private Date orderDate;
 
 }

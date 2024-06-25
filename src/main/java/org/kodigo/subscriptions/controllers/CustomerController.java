@@ -48,7 +48,7 @@ public class CustomerController {
         }
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerRequest request) {
         try {
             log.info("[Controller]: Starting execution createCustomer");
@@ -64,7 +64,7 @@ public class CustomerController {
         }
     }
 
-    @PutMapping("{customerId}")
+    @PutMapping("/{customerId}")
     public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable("customerId") Integer customerId, @RequestBody CustomerRequest request) {
         try {
             log.info("[Controller]: Starting execution updateCustomer");
@@ -80,7 +80,7 @@ public class CustomerController {
         }
     }
 
-    @DeleteMapping("{customerId}")
+    @DeleteMapping("/{customerId}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable("customerId") Integer customerId) {
         try {
             log.info("[Controller]: Starting execution deleteCustomer");

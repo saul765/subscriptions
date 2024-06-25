@@ -14,12 +14,12 @@ public interface ProductMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "price", target = "price")
     @Mapping(source = "merchant.id", target = "merchantId")
-    ProductDTO toProductDTO(ProductEntity product);
+    ProductDTO entityToDTO(ProductEntity product);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "price", target = "price")
     @Mapping(source = "merchantId", target = "merchant.id")
-    ProductEntity toProduct(ProductDTO productDTO);
+    ProductEntity dtoToEntity(ProductDTO productDTO);
 }

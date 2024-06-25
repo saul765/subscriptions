@@ -5,13 +5,18 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "order_details")
-public class OrderDetailEntity {
+public class OrderDetailEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +33,9 @@ public class OrderDetailEntity {
 
     @Column(name = "discount")
     private Double discount;
+
+    @Column(name = "price")
+    private Double price;
 
     @Column(name = "quantity")
     private Integer quantity;

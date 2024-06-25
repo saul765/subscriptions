@@ -12,7 +12,11 @@ public class OrderDetailDTO {
 
     private Integer productId;
 
+    private Integer orderId;
+
     private Double discount;
+
+    private Double price;
 
     private Integer quantity;
 
