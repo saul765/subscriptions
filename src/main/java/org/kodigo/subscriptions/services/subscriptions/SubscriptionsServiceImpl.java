@@ -15,7 +15,6 @@ import org.kodigo.subscriptions.services.customer.ICustomerService;
 import org.kodigo.subscriptions.services.merchant.IMerchantService;
 import org.kodigo.subscriptions.services.order.IOrderDetailService;
 import org.kodigo.subscriptions.services.order.IOrderService;
-import org.kodigo.subscriptions.services.product.IProductService;
 import org.kodigo.subscriptions.utils.interfaces.IDateService;
 import org.springframework.stereotype.Service;
 
