@@ -1,6 +1,7 @@
 package org.kodigo.subscriptions.services.merchant;
 
 import org.kodigo.subscriptions.dto.MerchantDTO;
+import org.kodigo.subscriptions.entity.MerchantEntity;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface IMerchantService {
     List<MerchantDTO> getMerchantByEmail(String email);
 
     List<MerchantDTO> getMerchantById(Integer merchantId);
+
+    MerchantEntity getMerchantEntityById(Integer merchantId);
 
     MerchantDTO createMerchant(MerchantDTO merchantDTO);
 

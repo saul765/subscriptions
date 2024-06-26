@@ -1,6 +1,7 @@
 package org.kodigo.subscriptions.mapper;
 
 import org.kodigo.subscriptions.dto.OrderDetailDTO;
+import org.kodigo.subscriptions.dto.SubscriptionProductDTO;
 import org.kodigo.subscriptions.entity.OrderDetailEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,13 +19,11 @@ public interface OrderDetailMapper {
     OrderDetailDTO entityToDto(OrderDetailEntity orderDetailEntity);
 
 
-    @Mapping(target = "id", source = "id")
     @Mapping(target = "product.id", source = "productId")
-    @Mapping(target = "order.id", source = "orderId")
     @Mapping(target = "quantity", source = "quantity")
     @Mapping(target = "price", source = "price")
     @Mapping(target = "discount", source = "discount")
-    OrderDetailEntity dtoToEntity(OrderDetailDTO orderDetailDTO);
+    OrderDetailEntity dtoToEntity(SubscriptionProductDTO orderDetailDTO);
 
 
 }

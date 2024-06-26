@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.kodigo.subscriptions.dto.ProductDTO;
 import org.kodigo.subscriptions.dto.ProductUpdateDTO;
+import org.kodigo.subscriptions.entity.ProductEntity;
 import org.kodigo.subscriptions.enums.ResponseCodeEnum;
 import org.kodigo.subscriptions.exception.AppException;
 import org.kodigo.subscriptions.mapper.ProductMapper;
@@ -101,6 +102,16 @@ public class ProductServiceImpl implements IProductService {
         }
 
         log.info("[Service]: Finishing execution getProductsByMerchantName");
+        return response;
+    }
+
+    @Override
+    public ProductEntity getProductEntityById(Integer productId) {
+        log.info("[Service]: Starting execution getProductEntityById");
+        ProductEntity response = productRepository.findById(productId.longValue())
+                .orElseThrow(() -> AppException.notFound(ResponseCodeEnum.CODE_404, "Product not found"));
+
+        log.info("[Service]: Finishing execution getProductEntityById");
         return response;
     }
 

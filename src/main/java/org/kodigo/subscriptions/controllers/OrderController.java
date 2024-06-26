@@ -2,13 +2,16 @@ package org.kodigo.subscriptions.controllers;
 
 
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.kodigo.subscriptions.dto.OrderDTO;
 import org.kodigo.subscriptions.enums.ResponseCodeEnum;
 import org.kodigo.subscriptions.exception.AppException;
 import org.kodigo.subscriptions.services.order.IOrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -38,9 +41,25 @@ public class OrderController {
                     .or(() -> Optional.ofNullable(subscriptionId)
                             .map(orderService::getOrderBySubscriptionId)
                             .map(ResponseEntity::ok))
+                    .or(() -> Optional.ofNullable(orderDate)
+                            .map(this::getOrderByOrderDateWrapper)
+                            .map(ResponseEntity::ok))
                     .orElseGet(() -> ResponseEntity.ok().body(orderService.getAllOrders()));
         } catch (
                 Exception e) {
+            if (e instanceof AppException) {
+                throw e;
+            } else {
+                throw AppException.internalServerError(ResponseCodeEnum.CODE_500, e.getMessage());
+            }
+        }
+    }
+
+    @SneakyThrows
+    private List<OrderDTO> getOrderByOrderDateWrapper(String orderDate) {
+        try {
+            return orderService.getOrderByOrderDate(orderDate);
+        } catch (Exception e) {
             if (e instanceof AppException) {
                 throw e;
             } else {

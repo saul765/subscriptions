@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.kodigo.subscriptions.dto.MerchantDTO;
+import org.kodigo.subscriptions.entity.MerchantEntity;
 import org.kodigo.subscriptions.enums.ResponseCodeEnum;
 import org.kodigo.subscriptions.exception.AppException;
 import org.kodigo.subscriptions.mapper.MerchantMapper;
@@ -84,6 +85,15 @@ public class MerchantServiceImpl implements IMerchantService {
             throw AppException.notFound(ResponseCodeEnum.CODE_404, "Merchants not found");
         }
         log.info("[Service]: Finishing execution getMerchantById");
+        return response;
+    }
+
+    @Override
+    public MerchantEntity getMerchantEntityById(Integer merchantId) {
+        log.info("[Service]: Starting execution getMerchantEntityById");
+        MerchantEntity response = merchantRepository.findById(merchantId.longValue())
+                .orElseThrow(() -> AppException.notFound(ResponseCodeEnum.CODE_404, "Merchant not found"));
+        log.info("[Service]: Finishing execution getMerchantEntityById");
         return response;
     }
 

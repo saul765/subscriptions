@@ -1,7 +1,12 @@
 package org.kodigo.subscriptions.services.order;
 
 import org.kodigo.subscriptions.dto.OrderDTO;
+import org.kodigo.subscriptions.entity.CustomerEntity;
+import org.kodigo.subscriptions.entity.OrderEntity;
+import org.kodigo.subscriptions.entity.SubscriptionEntity;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 public interface IOrderService {
@@ -14,7 +19,9 @@ public interface IOrderService {
 
     List<OrderDTO> getOrderByCustomerId(Integer customerId);
 
-    OrderDTO createOrder(OrderDTO orderDTO);
+    List<OrderDTO> getOrderByOrderDate(String orderDate) throws ParseException;
+
+    OrderEntity createOrder(CustomerEntity customer, SubscriptionEntity subscription, Date orderDate);
 
     void deleteOrder(Integer orderId);
 }

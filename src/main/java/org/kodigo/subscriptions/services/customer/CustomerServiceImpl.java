@@ -3,6 +3,7 @@ package org.kodigo.subscriptions.services.customer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.kodigo.subscriptions.dto.CustomerDTO;
+import org.kodigo.subscriptions.entity.CustomerEntity;
 import org.kodigo.subscriptions.enums.ResponseCodeEnum;
 import org.kodigo.subscriptions.exception.AppException;
 import org.kodigo.subscriptions.mapper.CustomerMapper;
@@ -88,6 +89,16 @@ public class CustomerServiceImpl implements ICustomerService {
         }
 
         log.info("[Service]: Finishing execution getCustomerById");
+        return response;
+    }
+
+    @Override
+    public CustomerEntity getCustomerEntityById(Integer customerId) {
+        log.info("[Service]: Starting execution getCustomerEntityById");
+        CustomerEntity response = customerRepository.findById(customerId.longValue())
+                .orElseThrow(() -> AppException.notFound(ResponseCodeEnum.CODE_404, "Customer not found"));
+
+        log.info("[Service]: Finishing execution getCustomerEntityById");
         return response;
     }
 

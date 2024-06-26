@@ -2,12 +2,17 @@ package org.kodigo.subscriptions.services.order;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.kodigo.subscriptions.dto.OrderDetailDTO;
 import org.kodigo.subscriptions.dto.OrderDetailUpdateDTO;
+import org.kodigo.subscriptions.dto.SubscriptionProductDTO;
+import org.kodigo.subscriptions.entity.OrderDetailEntity;
+import org.kodigo.subscriptions.entity.OrderEntity;
 import org.kodigo.subscriptions.enums.ResponseCodeEnum;
 import org.kodigo.subscriptions.exception.AppException;
 import org.kodigo.subscriptions.mapper.OrderDetailMapper;
 import org.kodigo.subscriptions.repositories.IOrderDetailRepository;
+import org.kodigo.subscriptions.services.product.IProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +23,8 @@ import java.util.List;
 public class OrderDetailServiceImpl implements IOrderDetailService {
 
     private final IOrderDetailRepository orderDetailRepository;
+
+    private final IProductService productService;
 
     private final OrderDetailMapper orderDetailMapper;
 
@@ -83,9 +90,22 @@ public class OrderDetailServiceImpl implements IOrderDetailService {
     }
 
     @Override
-    public OrderDetailDTO createOrderDetail(OrderDetailDTO orderDetailDTO) {
+    public void createOrderDetail(SubscriptionProductDTO subscriptionProductDTO, OrderEntity orderEntity) {
         log.info("[Service]: Starting execution createOrderDetail");
-        return null;
+
+        val productEntity = productService.getProductEntityById(subscriptionProductDTO.getProductId());
+
+        OrderDetailEntity orderDetailEntity = OrderDetailEntity.builder()
+                .order(orderEntity)
+                .product(productEntity)
+                .quantity(subscriptionProductDTO.getQuantity())
+                .discount(subscriptionProductDTO.getDiscount())
+                .price(subscriptionProductDTO.getPrice())
+                .subtotal((subscriptionProductDTO.getQuantity() * subscriptionProductDTO.getPrice()))
+                .total((subscriptionProductDTO.getQuantity() * subscriptionProductDTO.getPrice()) - subscriptionProductDTO.getDiscount())
+                .build();
+
+        orderDetailRepository.save(orderDetailEntity);
     }
 
     @Override
@@ -103,10 +123,11 @@ public class OrderDetailServiceImpl implements IOrderDetailService {
                         isUpdated = true;
                     }
                     if (isUpdated) {
-                        Double total = orderDetail.getQuantity() * orderDetail.getPrice();
-                        Double subtotal = total - orderDetail.getDiscount();
-                        orderDetail.setTotal(total);
+                        Double subtotal = orderDetail.getQuantity() * orderDetail.getPrice();
+                        Double total = subtotal - orderDetail.getDiscount();
+
                         orderDetail.setSubtotal(subtotal);
+                        orderDetail.setTotal(total);
                     }
                     return orderDetail;
                 })
